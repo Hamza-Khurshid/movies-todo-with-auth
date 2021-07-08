@@ -1,0 +1,10 @@
+export const LOGIN = "LOGIN"
+export const LOGIN_LOADING = "LOGIN_LOADING"
+
+export const REGISTER = "REGISTER"
+export const REGISTER_LOADING = "REGISTER_LOADING"
+
+export const GET_MOVIES = "GET_MOVIES"
+export const MOVIES_LOADING = "MOVIES_LOADING"
+
+export const CREATE_MOVIES = "CREATE_MOVIES"

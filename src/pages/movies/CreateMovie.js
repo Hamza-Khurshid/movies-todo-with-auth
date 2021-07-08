@@ -3,6 +3,8 @@ import '../login/style.css';
 import axios from 'axios';
 import endpoint from "../../constants/endpoint";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useDispatch } from "react-redux";
+import { createMovie } from "../../redux/actions/movies";
 
 export default () => {
     const history = useHistory()
@@ -10,6 +12,7 @@ export default () => {
     const [rating, setRating] = useState('')
     const [image, setImage] = useState(null)
 
+    const dispatch = useDispatch();
     const onSubmit = (e) => {
         e.preventDefault();
         
@@ -19,27 +22,12 @@ export default () => {
         formData.append('rating', rating);
         formData.append('image', image);
 
-        let token = localStorage.getItem('token', '')
-        var config = {
-            method: 'post',
-            url: endpoint + `/movie/create`,
-            headers: { 
-              'Accept': 'application/json', 
-              'Content-Type': 'application/json', 
-              'Authorization': `Bearer ${token}`
-            },
-            data: formData
-        };
-
-        axios(config)
-            .then(response => {
-                alert('Movie created successfully!')
-                history.push("/movies")
-            })
-            .catch(err => {
-                console.log("Error: ", err)
-                alert('Error while creating movie!')
-            })
+        dispatch(
+            createMovie(
+                formData,
+                () => history.push("/movies")
+            )
+        )
     }
 
     return (

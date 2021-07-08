@@ -1,11 +1,18 @@
 import './App.css';
 import Routing from './routing';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
 
 function App() {
   return (
-    <div className="App">
-      <Routing />
-    </div>
+    <Provider store={store}>
+
+      <div className="App">
+        <Routing />
+      </div>
+
+    </Provider>
   );
 }
 
